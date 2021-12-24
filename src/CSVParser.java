@@ -29,9 +29,9 @@ public class CSVParser {
                 String[] row = line.split(",");
 
                 for(String index : row) {
-                    System.out.printf("%-10s", index);
+                    //System.out.printf("%-10s", index);
                 }
-                System.out.println();
+                //System.out.println();
             }
         }
         catch(Exception e) {
