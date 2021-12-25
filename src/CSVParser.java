@@ -1,8 +1,11 @@
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class CSVParser {
+    List<List<String>> records = new ArrayList<>();
 
     public CSVParser(){
         /*List<List<String>> records = new ArrayList<>();
@@ -18,18 +21,29 @@ public class CSVParser {
         var a = 0;*/
 
 
+
         String file = "Спортивные учреждения.csv";
         BufferedReader reader = null;
         String line = "";
+        String line2 = "";
+
+        int i = 0;
 
         try {
             reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "windows-1251"));
-            while((line = reader.readLine()) != null) {
+            line = reader.readLine(); // skip column names
+            line = reader.readLine();
+            while(line != null) {
 
                 String[] row = line.split(",");
+                if ((line = reader.readLine()) != null) {
+                    records.add(Arrays.asList(row));
+                }
 
                 for(String index : row) {
+
                     //System.out.printf("%-10s", index);
+
                 }
                 //System.out.println();
             }
@@ -41,9 +55,12 @@ public class CSVParser {
             try {
                 reader.close();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
+    }
+
+    public void fillSQLiteSportsFacilitiesDB(){
+        DbHandler.createDb(records, "sportsFacilities");
     }
 }
