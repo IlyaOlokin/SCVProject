@@ -5,19 +5,19 @@ import java.util.List;
 
 
 public class CSVParser {
-    List<List<String>> records = new ArrayList<>();
+    public List<List<String>> records = new ArrayList<>();
 
     public CSVParser(){
         records = new ArrayList<>();
         String file = "Спортивные учреждения.csv";
         BufferedReader reader = null;
         String line = "";
-        String line2 = "";
 
-        int i = 0;
+        //int i = 0;
 
         try {
             reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "windows-1251"));
+
             line = reader.readLine(); // skip column names
             line = reader.readLine();
             while(line != null) {
@@ -29,29 +29,27 @@ public class CSVParser {
                 row.add(line.substring(0, line.indexOf(',')));
                 for (int j = 0; j < line.length(); j++){
                     if (line.charAt(j) == ','){
-
+                        String newCell = "";
                         if (Character.isDigit(line.charAt(j + 1))){
                             var end = line.indexOf(",", j + 2) + 1;
                             if (end == 0){
                                 end = line.length() + 1;
                             }
-                            var newCell = line.substring(j + 1, end - 1);
-                            row.add(newCell);
+                            newCell = line.substring(j + 1, end - 1);
+
                             j += newCell.length();
                         }
-                        else if (line.charAt(j + 1) != ',')
-                        {
+                        else if (line.charAt(j + 1) != ',') {
                             var end = line.indexOf("\"", j + 2) + 1;
                             if (end == 0){
                                 end = line.length() - 1;
                             }
-                            var newCell = line.substring(j + 1, end);
-                            row.add(newCell);
+                            newCell = line.substring(j + 1, end);
+
                             j += newCell.length();
                         }
-                        else{
-                            row.add("");
-                        }
+
+                        row.add(newCell.replaceAll("\"", ""));
                     }
                 }
 
@@ -61,18 +59,9 @@ public class CSVParser {
                     //records.add(Arrays.asList(row));
                 }
 
-                for(String index : row) {
-
-                    //System.out.printf("%-10s", index);
-
-                }
+                //System.out.printf("%-10s", index);
 
             }
-            System.out.println(records.get(0).get(3).replaceAll("\"", ""));
-
-
-
-
 
         }
         catch(Exception e) {
@@ -87,8 +76,5 @@ public class CSVParser {
         }
     }
 
-    public void createAndFillSQLiteSportsFacilitiesDb(){
-        //DbHandler.createSportsFacilitiesDb();
-        DbHandler.fillSportsFacilitiesDb(records);
-    }
+
 }
