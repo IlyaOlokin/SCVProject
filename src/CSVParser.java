@@ -1,27 +1,14 @@
 import java.io.*;
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 
 public class CSVParser {
     List<List<String>> records = new ArrayList<>();
 
     public CSVParser(){
-        /*List<List<String>> records = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader("Спортивные учреждения.csv"))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] values = line.split(" ");
-                records.add(Arrays.asList(values));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        var a = 0;*/
-
-
-
+        records = new ArrayList<>();
         String file = "Спортивные учреждения.csv";
         BufferedReader reader = null;
         String line = "";
@@ -35,9 +22,43 @@ public class CSVParser {
             line = reader.readLine();
             while(line != null) {
 
-                String[] row = line.split(",");
+                //String[] row = line.split("\",\"");
+                List<String> row = new ArrayList<>();
+
+                //line.replaceAll("\"", "");
+                row.add(line.substring(0, line.indexOf(',')));
+                for (int j = 0; j < line.length(); j++){
+                    if (line.charAt(j) == ','){
+
+                        if (Character.isDigit(line.charAt(j + 1))){
+                            var end = line.indexOf(",", j + 2) + 1;
+                            if (end == 0){
+                                end = line.length() + 1;
+                            }
+                            var newCell = line.substring(j + 1, end - 1);
+                            row.add(newCell);
+                            j += newCell.length();
+                        }
+                        else if (line.charAt(j + 1) != ',')
+                        {
+                            var end = line.indexOf("\"", j + 2) + 1;
+                            if (end == 0){
+                                end = line.length() - 1;
+                            }
+                            var newCell = line.substring(j + 1, end);
+                            row.add(newCell);
+                            j += newCell.length();
+                        }
+                        else{
+                            row.add("");
+                        }
+                    }
+                }
+
+
                 if ((line = reader.readLine()) != null) {
-                    records.add(Arrays.asList(row));
+                    records.add(row);
+                    //records.add(Arrays.asList(row));
                 }
 
                 for(String index : row) {
@@ -45,8 +66,14 @@ public class CSVParser {
                     //System.out.printf("%-10s", index);
 
                 }
-                //System.out.println();
+
             }
+            System.out.println(records.get(0).get(3).replaceAll("\"", ""));
+
+
+
+
+
         }
         catch(Exception e) {
             e.printStackTrace();
@@ -60,7 +87,8 @@ public class CSVParser {
         }
     }
 
-    public void fillSQLiteSportsFacilitiesDB(){
-        DbHandler.createDb(records, "sportsFacilities");
+    public void createAndFillSQLiteSportsFacilitiesDb(){
+        //DbHandler.createSportsFacilitiesDb();
+        DbHandler.fillSportsFacilitiesDb(records);
     }
 }
