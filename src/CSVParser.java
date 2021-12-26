@@ -26,7 +26,7 @@ public class CSVParser {
                 List<String> row = new ArrayList<>();
 
                 //line.replaceAll("\"", "");
-                row.add(line.substring(0, line.indexOf(',')));
+                row.add(line.substring(0, line.indexOf(',')).replaceAll("\"", "")); // add id
                 for (int j = 0; j < line.length(); j++){
                     if (line.charAt(j) == ','){
                         String newCell = "";
@@ -49,7 +49,7 @@ public class CSVParser {
                             j += newCell.length();
                         }
 
-                        row.add(newCell.replaceAll("\"", ""));
+                        row.add(newCell.replaceAll("\"", "").replace('\'', ' ').replace('&', ' '));
                     }
                 }
 

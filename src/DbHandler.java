@@ -15,7 +15,7 @@ public class DbHandler {
             Connection c = DriverManager.getConnection(jdbcUrl);
             Statement statement = c.createStatement();
 
-            statement.executeUpdate("create table " + dbName + " (" +
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS " + dbName + " (" +
                     "id integer primary key, " +
                     "name varchar(50), " +
                     "nameEN varchar(50), " +
@@ -44,17 +44,17 @@ public class DbHandler {
 
             for (var row: data){
 
-                int id = Integer.valueOf(row.get(0).replaceAll("\"", ""));
+                int id = Integer.valueOf(row.get(0));
                 i = id;
                 sql = "INSERT INTO " + dbName + String.format(" VALUES (%s, '%s', '%s', '%s', '%s', '%s', '%s', '%s');",
                         id,
                         row.get(1),
-                        row.get(2).replace('\'', ' '),
-                        row.get(3).replace('\'', ' ').replace('&', ' '),
-                        row.get(4).replace('\'', ' ').replace('&', ' '),
-                        row.get(5).replace('\'', ' ').replace('&', ' '),
-                        row.get(6).replace('\'', ' ').replace('&', ' '),
-                        row.get(7).replace('\'', ' ').replace('&', ' ')
+                        row.get(2),
+                        row.get(3),
+                        row.get(4),
+                        row.get(5),
+                        row.get(6),
+                        row.get(7)
                         );
                 //System.out.println(sql);
                 statement.executeUpdate(sql);
@@ -99,7 +99,7 @@ public class DbHandler {
             Connection c = DriverManager.getConnection(jdbcUrl);
             Statement statement = c.createStatement();
 
-            statement.executeUpdate("create table " + dbName + " (" +
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS " + dbName + " (" +
                     "id integer primary key, " +
                     "MO varchar(50), " +
                     "subjectOfTheFederation varchar(50), " +
@@ -129,18 +129,18 @@ public class DbHandler {
 
             for (var row: data){
 
-                int id = Integer.valueOf(row.get(0).replaceAll("\"", ""));
+                int id = Integer.valueOf(row.get(0));
                 i = id;
                 sql = "INSERT INTO " + dbName + String.format(" VALUES (%s, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');",
                         id,
-                        row.get(8).replace('\'', ' ').replace('&', ' '),
-                        row.get(9).replace('\'', ' ').replace('&', ' '),
-                        row.get(10).replace('\'', ' ').replace('&', ' '),
-                        row.get(11).replace('\'', ' ').replace('&', ' '),
-                        row.get(12).replace('\'', ' ').replace('&', ' '),
-                        row.get(13).replace('\'', ' ').replace('&', ' '),
-                        row.get(14).replace('\'', ' ').replace('&', ' '),
-                        row.get(15).replace('\'', ' ').replace('&', ' ')
+                        row.get(8),
+                        row.get(9),
+                        row.get(10),
+                        row.get(11),
+                        row.get(12),
+                        row.get(13),
+                        row.get(14),
+                        row.get(15)
                 );
                 //System.out.println(sql);
                 statement.executeUpdate(sql);
@@ -187,9 +187,11 @@ public class DbHandler {
             Connection c = DriverManager.getConnection(jdbcUrl);
             Statement statement = c.createStatement();
 
-            statement.executeUpdate("create table " + dbName + " (" +
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS " + dbName + " (" +
                     "id integer primary key, " +
                     "FTP varchar(50), " +
+                    "name varchar(50), " +
+                    "sportsComplexType varchar(100), " +
                     "actions varchar(50), " +
                     "startDate datetime, " +
                     "endDate datetime, " +
@@ -222,23 +224,25 @@ public class DbHandler {
 
             for (var row: data){
 
-                int id = Integer.valueOf(row.get(0).replaceAll("\"", ""));
+                int id = Integer.valueOf(row.get(0));
                 i = id;
-                sql = "INSERT INTO " + dbName + String.format(" VALUES (%s, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');",
+                sql = "INSERT INTO " + dbName + String.format(" VALUES (%s, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');",
                         id,
-                        row.get(16).replace('\'', ' ').replace('&', ' '),
-                        row.get(17).replace('\'', ' ').replace('&', ' '),
+                        row.get(16),
+                        row.get(1),
+                        row.get(43),
+                        row.get(17),
                         convertStringToTimestamp(row.get(18)),
                         convertStringToTimestamp(row.get(19)),
-                        row.get(20).replace('\'', ' ').replace('&', ' '),
-                        row.get(21).replace('\'', ' ').replace('&', ' '),
-                        row.get(22).replace('\'', ' ').replace('&', ' '),
-                        row.get(23).replace('\'', ' ').replace('&', ' '),
-                        row.get(24).replace('\'', ' ').replace('&', ' '),
-                        row.get(25).replace('\'', ' ').replace('&', ' '),
-                        row.get(26).replace('\'', ' ').replace('&', ' '),
-                        row.get(27).replace('\'', ' ').replace('&', ' '),
-                        row.get(28).replace('\'', ' ').replace('&', ' ')
+                        row.get(20),
+                        row.get(21),
+                        row.get(22),
+                        row.get(23),
+                        row.get(24),
+                        row.get(25),
+                        row.get(26),
+                        row.get(27),
+                        row.get(28)
                 );
                 //System.out.println(sql);
                 statement.executeUpdate(sql);
@@ -256,6 +260,10 @@ public class DbHandler {
                 System.out.println(result.getString("id") +
                         " " +
                         result.getString("FTP") +
+                        " " +
+                        result.getString("name") +
+                        " " +
+                        result.getString("sportsComplexType") +
                         " " +
                         result.getString("actions") +
                         " " +
@@ -296,7 +304,7 @@ public class DbHandler {
             Connection c = DriverManager.getConnection(jdbcUrl);
             Statement statement = c.createStatement();
 
-            statement.executeUpdate("create table " + dbName + " (" +
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS " + dbName + " (" +
                     "id integer primary key, " +
                     "supervisingAuthority varchar(50), " +
                     "supervisingAuthorityEN varchar(50), " +
@@ -323,15 +331,16 @@ public class DbHandler {
 
             for (var row: data){
 
-                int id = Integer.valueOf(row.get(0).replaceAll("\"", ""));
+                int id = Integer.valueOf(row.get(0));
                 i = id;
                 sql = "INSERT INTO " + dbName + String.format(" VALUES (%s, '%s', '%s', '%s', '%s', '%s');",
                         id,
-                        row.get(30).replace('\'', ' ').replace('&', ' '),
-                        row.get(31).replace('\'', ' ').replace('&', ' '),
-                        row.get(32).replace('\'', ' ').replace('&', ' '),
-                        row.get(33).replace('\'', ' ').replace('&', ' '),
-                        row.get(34).replace('\'', ' ').replace('&', ' '));
+                        row.get(30),
+                        row.get(31),
+                        row.get(32),
+                        row.get(33),
+                        row.get(34)
+                );
                 //System.out.println(sql);
                 statement.executeUpdate(sql);
 
@@ -371,7 +380,7 @@ public class DbHandler {
             Connection c = DriverManager.getConnection(jdbcUrl);
             Statement statement = c.createStatement();
 
-            statement.executeUpdate("create table " + dbName + " (" +
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS " + dbName + " (" +
                     "id integer primary key, " +
                     "objectPhone varchar(50), " +
                     "workingHoursMon_Fri varchar(50), " +
@@ -399,16 +408,17 @@ public class DbHandler {
 
             for (var row: data){
 
-                int id = Integer.valueOf(row.get(0).replaceAll("\"", ""));
+                int id = Integer.valueOf(row.get(0));
                 i = id;
                 sql = "INSERT INTO " + dbName + String.format(" VALUES (%s, '%s', '%s', '%s', '%s', '%s', '%s');",
                         id,
-                        row.get(35).replace('\'', ' ').replace('&', ' '),
-                        row.get(36).replace('\'', ' ').replace('&', ' '),
-                        row.get(37).replace('\'', ' ').replace('&', ' '),
-                        row.get(38).replace('\'', ' ').replace('&', ' '),
-                        row.get(40).replace('\'', ' ').replace('&', ' '),
-                        row.get(41).replace('\'', ' ').replace('&', ' '));
+                        row.get(35),
+                        row.get(36),
+                        row.get(37),
+                        row.get(38),
+                        row.get(40),
+                        row.get(41)
+                );
                 //System.out.println(sql);
                 statement.executeUpdate(sql);
 
@@ -450,7 +460,7 @@ public class DbHandler {
             Connection c = DriverManager.getConnection(jdbcUrl);
             Statement statement = c.createStatement();
 
-            statement.executeUpdate("create table " + dbName + " (" +
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS " + dbName + " (" +
                     "id integer primary key, " +
                     "x integer, " +
                     "y integer, " +
@@ -479,7 +489,7 @@ public class DbHandler {
 
             for (var row: data){
 
-                int id = Integer.valueOf(row.get(0).replaceAll("\"", ""));
+                int id = Integer.valueOf(row.get(0));
                 i = id;
                 sql = "INSERT INTO " + dbName + String.format(" VALUES (%s, '%s', '%s', '%s', '%s', '%s', '%s', '%s');",
                         id,
@@ -533,7 +543,7 @@ public class DbHandler {
             Connection c = DriverManager.getConnection(jdbcUrl);
             Statement statement = c.createStatement();
 
-            statement.executeUpdate("create table " + dbName + " (" +
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS " + dbName + " (" +
                     "id integer primary key, " +
                     "registered varchar(10), " +
                     "sportsComplexType varchar(100), " +
@@ -567,7 +577,7 @@ public class DbHandler {
 
             for (var row: data){
 
-                int id = Integer.valueOf(row.get(0).replaceAll("\"", ""));
+                int id = Integer.valueOf(row.get(0));
                 i = id;
                 sql = "INSERT INTO " + dbName + String.format(" VALUES (%s, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');",
                         id,

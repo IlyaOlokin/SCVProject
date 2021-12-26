@@ -10,7 +10,7 @@ public class Main {
         //DbHandler.createAddressTable();
         //DbHandler.fillAddressTable(parser.records);
 
-        //DbHandler.createFederalTargetProgramTable();*/
+        //DbHandler.createFederalTargetProgramTable();
         //DbHandler.fillFederalTargetProgramTable(parser.records);
 
         //DbHandler.createSupervisingAuthorityTable();
@@ -26,7 +26,7 @@ public class Main {
         //DbHandler.fillAdditionalInfoTable(parser.records);*/
 
         //meanFunding2012();
-        
+        //maxFundingSportsComplex();
     }
 
     public static void meanFunding2012(){
@@ -57,4 +57,48 @@ public class Main {
         }
 
     }
+
+    public static void maxFundingSportsComplex(){
+        Connection c = null;
+        try {
+            c = DriverManager.getConnection("jdbc:sqlite:DBs/federalTargetProgram.db");
+
+
+
+
+           /*String sql = "SELECT name, totalFunding " +
+                    "FROM federalTargetProgram " +
+                    "WHERE sportsComplexType LIKE '%многофункциональный спортивный комплекс%' " +
+                    "OR sportsComplexType LIKE '%стадион%' " +
+                    "WHERE totalFunding = MAX(totalFunding) GROUP BY totalFunding";*/
+
+            String sql = "SELECT name, totalFunding FROM federalTargetProgram " +
+                    "WHERE sportsComplexType LIKE '%многофункциональный спортивный комплекс%' " +
+                    "OR sportsComplexType LIKE '%стадион%' " +
+                    "ORDER BY totalFunding DESC LIMIT 1";
+
+
+
+
+            Statement statement = c.createStatement();
+            ResultSet result = statement.executeQuery(sql);
+
+           while (result.next())
+           {
+               System.out.println("Название: " + result.getString("name"));
+               System.out.println("Объем финансирования постройки: " + result.getString("totalFunding"));
+           }
+
+
+
+            System.out.println();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
 }
