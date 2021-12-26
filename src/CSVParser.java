@@ -22,10 +22,8 @@ public class CSVParser {
             line = reader.readLine();
             while(line != null) {
 
-                //String[] row = line.split("\",\"");
                 List<String> row = new ArrayList<>();
 
-                //line.replaceAll("\"", "");
                 row.add(line.substring(0, line.indexOf(',')).replaceAll("\"", "")); // add id
                 for (int j = 0; j < line.length(); j++){
                     if (line.charAt(j) == ','){

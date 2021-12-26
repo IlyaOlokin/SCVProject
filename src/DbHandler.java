@@ -642,6 +642,9 @@ public class DbHandler {
         Date date = null;
         try {
             date = formatter.parse(strDate);
+            if (date.getYear() + 1900 < 1970){
+                return new Timestamp(0);
+            }
         } catch (ParseException e) {
             return new Timestamp(0);
         }
