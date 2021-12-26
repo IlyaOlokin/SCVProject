@@ -13,8 +13,6 @@ public class CSVParser {
         BufferedReader reader = null;
         String line = "";
 
-        //int i = 0;
-
         try {
             reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "windows-1251"));
 
@@ -54,11 +52,7 @@ public class CSVParser {
 
                 if ((line = reader.readLine()) != null) {
                     records.add(row);
-                    //records.add(Arrays.asList(row));
                 }
-
-                //System.out.printf("%-10s", index);
-
             }
 
         }

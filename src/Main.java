@@ -29,8 +29,6 @@ public class Main {
         buildChart(); // 1 задание
         avgFunding2012(); // 2 задание
         maxFundingSportsComplex(); //3 задание
-
-
     }
 
     public static void avgFunding2012(){
@@ -52,7 +50,6 @@ public class Main {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     public static void maxFundingSportsComplex(){
@@ -60,22 +57,10 @@ public class Main {
         try {
             c = DriverManager.getConnection("jdbc:sqlite:DBs/federalTargetProgram.db");
 
-
-
-
-           /*String sql = "SELECT name, totalFunding " +
-                    "FROM federalTargetProgram " +
-                    "WHERE sportsComplexType LIKE '%многофункциональный спортивный комплекс%' " +
-                    "OR sportsComplexType LIKE '%стадион%' " +
-                    "WHERE totalFunding = MAX(totalFunding) GROUP BY totalFunding";*/
-
             String sql = "SELECT name, totalFunding FROM federalTargetProgram " +
                     "WHERE sportsComplexType LIKE '%многофункциональный спортивный комплекс%' " +
                     "OR sportsComplexType LIKE '%стадион%' " +
                     "ORDER BY totalFunding DESC LIMIT 1";
-
-
-
 
             Statement statement = c.createStatement();
             ResultSet result = statement.executeQuery(sql);
@@ -86,21 +71,14 @@ public class Main {
                System.out.println("Объем финансирования постройки: " + result.getString("totalFunding"));
            }
 
-
-
-            System.out.println();
-
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     public static void buildChart(){
         LineChartsBuilder chart = new LineChartsBuilder("Общий объем финансирования по годам завершения строительства");
         chart.pack();
         chart.setVisible(true);
-
     }
 }
