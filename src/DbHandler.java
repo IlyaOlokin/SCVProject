@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class DbHandler {
 
-    public static void createSportsFacilitiesTable(){
+    public static void createSportsFacilitiesTable() {
         String dbName = "sportsFacilities";
         String jdbcUrl = "jdbc:sqlite:DBs/" + dbName + ".db";
 
@@ -30,7 +30,7 @@ public class DbHandler {
         }
     }
 
-    public static void fillSportsFacilitiesTable(List<List<String>> data){
+    public static void fillSportsFacilitiesTable(List<List<String>> data) {
         String dbName = "sportsFacilities";
         String jdbcUrl = "jdbc:sqlite:DBs/" + dbName + ".db";
         int i = 0;
@@ -42,7 +42,7 @@ public class DbHandler {
             statement.executeUpdate("delete from " + dbName + ";");
             statement.executeUpdate("vacuum;");
 
-            for (var row: data){
+            for (var row : data) {
 
                 int id = Integer.valueOf(row.get(0));
                 i = id;
@@ -55,20 +55,15 @@ public class DbHandler {
                         row.get(5),
                         row.get(6),
                         row.get(7)
-                        );
-                //System.out.println(sql);
+                );
                 statement.executeUpdate(sql);
-
             }
 
-            //String sql = "SELECT * FROM " + dbName;
-
-
-            sql = "SELECT * FROM " + dbName;
+            /*sql = "SELECT * FROM " + dbName;
             statement = c.createStatement();
             ResultSet result = statement.executeQuery(sql);
 
-            while (result.next()){
+            while (result.next()) {
                 System.out.println(result.getString("id") +
                         " " +
                         result.getString("name") +
@@ -84,14 +79,14 @@ public class DbHandler {
                         result.getString("shortDescriptionEN") +
                         " " +
                         result.getString("detailedDescriptionEN"));
-            }
+            }*/
         } catch (SQLException e) {
             System.out.println("error on id: " + i + "  " + sql);
             e.printStackTrace();
         }
     }
 
-    public static void createAddressTable(){
+    public static void createAddressTable() {
         String dbName = "address";
         String jdbcUrl = "jdbc:sqlite:DBs/" + dbName + ".db";
 
@@ -115,7 +110,7 @@ public class DbHandler {
         }
     }
 
-    public static void fillAddressTable(List<List<String>> data){
+    public static void fillAddressTable(List<List<String>> data) {
         String dbName = "address";
         String jdbcUrl = "jdbc:sqlite:DBs/" + dbName + ".db";
         int i = 0;
@@ -127,7 +122,7 @@ public class DbHandler {
             statement.executeUpdate("delete from " + dbName + ";");
             statement.executeUpdate("vacuum;");
 
-            for (var row: data){
+            for (var row : data) {
 
                 int id = Integer.valueOf(row.get(0));
                 i = id;
@@ -142,13 +137,8 @@ public class DbHandler {
                         row.get(14),
                         row.get(15)
                 );
-                //System.out.println(sql);
                 statement.executeUpdate(sql);
-
             }
-
-            //String sql = "SELECT * FROM " + dbName;
-
 
            /*sql = "SELECT * FROM " + dbName;
             statement = c.createStatement();
@@ -179,7 +169,7 @@ public class DbHandler {
         }
     }
 
-    public static void createFederalTargetProgramTable(){
+    public static void createFederalTargetProgramTable() {
         String dbName = "federalTargetProgram";
         String jdbcUrl = "jdbc:sqlite:DBs/" + dbName + ".db";
 
@@ -210,7 +200,7 @@ public class DbHandler {
         }
     }
 
-    public static void fillFederalTargetProgramTable(List<List<String>> data){
+    public static void fillFederalTargetProgramTable(List<List<String>> data) {
         String dbName = "federalTargetProgram";
         String jdbcUrl = "jdbc:sqlite:DBs/" + dbName + ".db";
         int i = 0;
@@ -222,7 +212,7 @@ public class DbHandler {
             statement.executeUpdate("delete from " + dbName + ";");
             statement.executeUpdate("vacuum;");
 
-            for (var row: data){
+            for (var row : data) {
 
                 int id = Integer.valueOf(row.get(0));
                 i = id;
@@ -244,19 +234,14 @@ public class DbHandler {
                         row.get(27),
                         row.get(28)
                 );
-                //System.out.println(sql);
                 statement.executeUpdate(sql);
-
             }
 
-            //String sql = "SELECT * FROM " + dbName;
-
-
-           sql = "SELECT * FROM " + dbName;
+            /*sql = "SELECT * FROM " + dbName;
             statement = c.createStatement();
             ResultSet result = statement.executeQuery(sql);
 
-            while (result.next()){
+            while (result.next()) {
                 System.out.println(result.getString("id") +
                         " " +
                         result.getString("FTP") +
@@ -289,14 +274,14 @@ public class DbHandler {
                         " " +
                         result.getString("extraBudgetarySourcesFundingUsed"));
 
-            }
+            }*/
         } catch (SQLException e) {
             System.out.println("error on id: " + i + "  " + sql);
             e.printStackTrace();
         }
     }
 
-    public static void createSupervisingAuthorityTable(){
+    public static void createSupervisingAuthorityTable() {
         String dbName = "supervisingAuthority";
         String jdbcUrl = "jdbc:sqlite:DBs/" + dbName + ".db";
 
@@ -317,7 +302,7 @@ public class DbHandler {
         }
     }
 
-    public static void fillSupervisingAuthorityTable(List<List<String>> data){
+    public static void fillSupervisingAuthorityTable(List<List<String>> data) {
         String dbName = "accessInfo";
         String jdbcUrl = "jdbc:sqlite:DBs/" + dbName + ".db";
         int i = 0;
@@ -329,7 +314,7 @@ public class DbHandler {
             statement.executeUpdate("delete from " + dbName + ";");
             statement.executeUpdate("vacuum;");
 
-            for (var row: data){
+            for (var row : data) {
 
                 int id = Integer.valueOf(row.get(0));
                 i = id;
@@ -341,13 +326,8 @@ public class DbHandler {
                         row.get(33),
                         row.get(34)
                 );
-                //System.out.println(sql);
                 statement.executeUpdate(sql);
-
             }
-
-            //String sql = "SELECT * FROM " + dbName;
-
 
             /*sql = "SELECT * FROM " + dbName;
             statement = c.createStatement();
@@ -372,7 +352,7 @@ public class DbHandler {
         }
     }
 
-    public static void createAccessInfoTable(){
+    public static void createAccessInfoTable() {
         String dbName = "accessInfo";
         String jdbcUrl = "jdbc:sqlite:DBs/" + dbName + ".db";
 
@@ -394,7 +374,7 @@ public class DbHandler {
         }
     }
 
-    public static void fillAccessInfoTable(List<List<String>> data){
+    public static void fillAccessInfoTable(List<List<String>> data) {
         String dbName = "accessInfo";
         String jdbcUrl = "jdbc:sqlite:DBs/" + dbName + ".db";
         int i = 0;
@@ -406,7 +386,7 @@ public class DbHandler {
             statement.executeUpdate("delete from " + dbName + ";");
             statement.executeUpdate("vacuum;");
 
-            for (var row: data){
+            for (var row : data) {
 
                 int id = Integer.valueOf(row.get(0));
                 i = id;
@@ -419,13 +399,8 @@ public class DbHandler {
                         row.get(40),
                         row.get(41)
                 );
-                //System.out.println(sql);
                 statement.executeUpdate(sql);
-
             }
-
-            //String sql = "SELECT * FROM " + dbName;
-
 
             /*sql = "SELECT * FROM " + dbName;
             statement = c.createStatement();
@@ -452,7 +427,7 @@ public class DbHandler {
         }
     }
 
-    public static void createСoordinatesTable(){
+    public static void createСoordinatesTable() {
         String dbName = "coordinates";
         String jdbcUrl = "jdbc:sqlite:DBs/" + dbName + ".db";
 
@@ -475,7 +450,7 @@ public class DbHandler {
         }
     }
 
-    public static void fillСoordinatesTable(List<List<String>> data){
+    public static void fillСoordinatesTable(List<List<String>> data) {
         String dbName = "coordinates";
         String jdbcUrl = "jdbc:sqlite:DBs/" + dbName + ".db";
         int i = 0;
@@ -487,7 +462,7 @@ public class DbHandler {
             statement.executeUpdate("delete from " + dbName + ";");
             statement.executeUpdate("vacuum;");
 
-            for (var row: data){
+            for (var row : data) {
 
                 int id = Integer.valueOf(row.get(0));
                 i = id;
@@ -500,13 +475,8 @@ public class DbHandler {
                         row.get(50),
                         row.get(51),
                         row.get(52));
-                //System.out.println(sql);
                 statement.executeUpdate(sql);
-
             }
-
-            //String sql = "SELECT * FROM " + dbName;
-
 
             /*sql = "SELECT * FROM " + dbName;
             statement = c.createStatement();
@@ -535,7 +505,7 @@ public class DbHandler {
         }
     }
 
-    public static void createAdditionalInfoTable(){
+    public static void createAdditionalInfoTable() {
         String dbName = "additionalInfo";
         String jdbcUrl = "jdbc:sqlite:DBs/" + dbName + ".db";
 
@@ -563,7 +533,7 @@ public class DbHandler {
         }
     }
 
-    public static void fillAdditionalInfoTable(List<List<String>> data){
+    public static void fillAdditionalInfoTable(List<List<String>> data) {
         String dbName = "additionalInfo";
         String jdbcUrl = "jdbc:sqlite:DBs/" + dbName + ".db";
         int i = 0;
@@ -575,7 +545,7 @@ public class DbHandler {
             statement.executeUpdate("delete from " + dbName + ";");
             statement.executeUpdate("vacuum;");
 
-            for (var row: data){
+            for (var row : data) {
 
                 int id = Integer.valueOf(row.get(0));
                 i = id;
@@ -593,13 +563,8 @@ public class DbHandler {
                         row.get(58),
                         row.get(59),
                         row.get(60));
-                //System.out.println(sql);
                 statement.executeUpdate(sql);
-
             }
-
-            //String sql = "SELECT * FROM " + dbName;
-
 
             /*sql = "SELECT * FROM " + dbName;
             statement = c.createStatement();
@@ -642,7 +607,7 @@ public class DbHandler {
         Date date = null;
         try {
             date = formatter.parse(strDate);
-            if (date.getYear() + 1900 < 1970){
+            if (date.getYear() + 1900 < 1970) {
                 return new Timestamp(0);
             }
         } catch (ParseException e) {
@@ -652,7 +617,6 @@ public class DbHandler {
 
         return timeStampDate;
     }
-
 
 }
 

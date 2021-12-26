@@ -4,8 +4,8 @@ public class Main {
     public static void main(String[] args){
         CSVParser parser = new CSVParser();
 
-        //DbHandler.createSportsFacilitiesTable();
-        //DbHandler.fillSportsFacilitiesTable(parser.records);
+        //DbHandler.createSportsFacilitiesTable(); // Объявить таблицу
+        //DbHandler.fillSportsFacilitiesTable(parser.records); // Заполнить таблицу данными
 
         //DbHandler.createAddressTable();
         //DbHandler.fillAddressTable(parser.records);
@@ -23,14 +23,13 @@ public class Main {
         //DbHandler.fillСoordinatesTable(parser.records);
 
         //DbHandler.createAdditionalInfoTable();
-        //DbHandler.fillAdditionalInfoTable(parser.records);*/
+        //DbHandler.fillAdditionalInfoTable(parser.records);
 
-        //avgFunding2012();
-        //maxFundingSportsComplex();
 
-        LineChartsBuilder chart = new LineChartsBuilder("Общий объем финансирования по годам завершения строительства");
-        chart.pack( );
-        chart.setVisible( true );
+        buildChart(); // 1 задание
+        avgFunding2012(); // 2 задание
+        maxFundingSportsComplex(); //3 задание
+
 
     }
 
@@ -95,6 +94,13 @@ public class Main {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+    }
+
+    public static void buildChart(){
+        LineChartsBuilder chart = new LineChartsBuilder("Общий объем финансирования по годам завершения строительства");
+        chart.pack();
+        chart.setVisible(true);
 
     }
 }

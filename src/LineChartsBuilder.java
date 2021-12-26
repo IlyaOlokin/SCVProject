@@ -30,6 +30,7 @@ public class LineChartsBuilder extends ApplicationFrame{
             Connection c = DriverManager.getConnection("jdbc:sqlite:DBs/federalTargetProgram.db");
             Statement statement = c.createStatement();
 
+
             String sql = "SELECT AVG(totalFunding), strftime('%Y', endDate) year " +
                     "FROM federalTargetProgram " +
                     "GROUP BY year";
